@@ -1,10 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from 'next/image';
 
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const { data: brands, isLoading } = api.club.getAllBrands.useQuery();
+  const { data: specs, isLoading } = api.club.getSpecsForModel.useQuery({
+    brand: 'TaylorMade',
+    model: 'Qi HL #6',
+  });
 
   return (
     <>
@@ -43,11 +47,21 @@ export default function Home() {
             </Link>
           </div>
           <p className="text-2xl text-white">
-          {isLoading
-              ? "Loading tRPC query..."
-              : brands && brands.length > 0
-              ? brands.map((brand) => brand).join(", ")
-              : "No brands found"}
+          {isLoading ? (
+              "Loading specs..."
+            ) : specs?.specs && typeof specs.specs === 'object' && 'img_src' in specs.specs ? (
+              <div>
+                <Image
+                  src={(specs.specs as { img_src: string })?.img_src || ''}
+                  alt={`Image of ${(specs.specs as { model_name: string })?.model_name || 'unknown model'}`}
+                  width={500}
+                  height={500}
+                  className="rounded-lg"
+                />
+              </div>
+            ) : (
+              "Image not found for TaylorMade Qi HL #6"
+            )}
           </p>
         </div>
       </main>

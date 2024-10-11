@@ -38,4 +38,31 @@ export const clubRouter = createTRPCRouter({
 
         return brands.map(brand => brand.name);
     }),
+
+    getSpecsForModel: publicProcedure
+        .input(z.object({
+            brand: z.string().min(1),
+            model: z.string().min(1)
+        }))
+        .query(async ({ ctx, input }) => {
+            const club = await ctx.db.model.findFirst({
+                where: {
+                    name: input.model,
+                    brand: {
+                        name: input.brand
+                    }
+                },
+                select: {
+                    specs: true // Selecting the specs from the model
+                }
+            });
+
+            if (!club?.specs) {
+                throw new Error('Specifications not found for the specified brand and model');
+            }
+
+            return {
+                specs: club.specs // Returning the entire specs JSON
+            };
+        }),
 });

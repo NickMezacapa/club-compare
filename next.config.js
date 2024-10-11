@@ -17,6 +17,9 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    domains: ['club-model-images.s3.us-east-2.amazonaws.com'], // Add your external domain here
+  },
   transpilePackages: ["geist"],
 };
 
