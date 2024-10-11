@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Post {
+    id        Int      @id @default(autoincrement())
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([name])
+}
+
+// Brand model representing golf club brands
+model Brand {
+    id     Int     @id @default(autoincrement())
+    name   String  @unique
+    models Model[] // One-to-many relationship with models
+}
+
+// Model representing individual golf club models
+model Model {
+    id        Int      @id @default(autoincrement())
+    name      String
+    brand     Brand    @relation(fields: [brandId], references: [id])
+    brandId   Int
+    specs     Json // Use JSONB to store all the specifications
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([name, brandId])
+}
