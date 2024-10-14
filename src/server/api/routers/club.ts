@@ -65,4 +65,40 @@ export const clubRouter = createTRPCRouter({
                 specs: club.specs // Returning the entire specs JSON
             };
         }),
+
+    // New search route for dynamically searching golf clubs
+    searchClubs: publicProcedure
+        .input(z.string().min(1))
+        .query(async ({ ctx, input }) => {
+            const searchTerms = input.split(" ");
+
+            const clubs = await ctx.db.model.findMany({
+                where: {
+                    OR: [
+                        { name: { contains: input, mode: "insensitive" } },
+                        { brand: { name: { contains: input, mode: "insensitive" } } },
+                        {
+                            AND: searchTerms.map(term => ({
+                                OR: [
+                                    { name: { contains: term, mode: "insensitive" } },
+                                    { brand: { name: { contains: term, mode: "insensitive" } } },
+                                ],
+                            })),
+                        },
+                    ],
+                },
+                select: {
+                    name: true,
+                    brand: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                },
+                take: 10, // Limit the number of results
+            });
+
+            return clubs;
+        }),
+
 });

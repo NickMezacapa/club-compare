@@ -2,13 +2,15 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from 'next/image';
 
+import ClubSearch from '~/components/ClubSearch';
+
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const { data: specs, isLoading } = api.club.getSpecsForModel.useQuery({
+/*   const { data: specs, isLoading } = api.club.getSpecsForModel.useQuery({
     brand: 'TaylorMade',
     model: 'Qi HL #6',
-  });
+  }); */
 
   return (
     <>
@@ -46,7 +48,12 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <p className="text-2xl text-white">
+
+          <div className="container mx-auto mt-8">
+      <h1 className="text-2xl font-bold mb-4">Search for Golf Clubs</h1>
+      <ClubSearch />
+    </div>
+{/*           <p className="text-2xl text-white">
           {isLoading ? (
               "Loading specs..."
             ) : specs?.specs && typeof specs.specs === 'object' && 'img_src' in specs.specs ? (
@@ -62,7 +69,7 @@ export default function Home() {
             ) : (
               "Image not found for TaylorMade Qi HL #6"
             )}
-          </p>
+          </p> */}
         </div>
       </main>
     </>
