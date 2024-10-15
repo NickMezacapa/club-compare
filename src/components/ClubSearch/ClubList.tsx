@@ -1,4 +1,3 @@
-// components/ClubList.tsx
 import { type Club } from '~/utils/constants';
 
 interface ClubListProps {

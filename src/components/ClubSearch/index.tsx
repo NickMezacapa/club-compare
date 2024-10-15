@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import throttle from 'lodash.throttle';
 
 import { api } from '~/utils/api'; 
@@ -12,6 +13,8 @@ const ClubSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [throttledSearchTerm, setThrottledSearchTerm] = useState(searchTerm);
   const [selectedClubs, setSelectedClubs] = useState<Club[]>([]);
+
+  const router = useRouter()
 
   const throttledUpdate = throttle((term: string) => {
     setThrottledSearchTerm(term);
@@ -28,6 +31,14 @@ const ClubSearch = () => {
     setSearchTerm('')
   };
 
+  const handleCompareClubs = async () => {
+    if (selectedClubs.length === 2) {
+        const [club1, club2] = selectedClubs
+        const slug = `${club1?.name}-${club2?.name}`
+        await router.push(`/compare/${slug}`)
+    }
+  }
+
   const showSearchSuggestions = clubs && clubs.length > 0 && selectedClubs.length < 2;
 
   useEffect(() => {
@@ -39,6 +50,15 @@ const ClubSearch = () => {
       <ClubSearchInput searchTerm={searchTerm} onSearchChange={setSearchTerm} numClubs={selectedClubs.length} />
 
       {isLoading && <p>Loading...</p>}
+
+      {selectedClubs.length === 2 && (
+      <button 
+        className="mt-4 bg-blue-500 text-white p-2 rounded-md" 
+        onClick={handleCompareClubs}
+      >
+        Compare Clubs
+      </button>
+    )}
 
       {showSearchSuggestions && (
         <ClubList clubs={clubs} onClubSelect={handleSelectClub} />

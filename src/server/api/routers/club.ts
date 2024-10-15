@@ -102,4 +102,29 @@ export const clubRouter = createTRPCRouter({
             return clubs;
         }),
 
+    getClubByName: publicProcedure
+        .input(z.string().min(1))
+        .query(async ({ ctx, input }) => {
+            const club = await ctx.db.model.findFirst({
+                where: {
+                    name: input, // Club name is expected in the input
+                },
+                select: {
+                    name: true,
+                    brand: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                    specs: true, // Return all specs for the club
+                },
+            });
+
+            if (!club) {
+                throw new Error("Club not found");
+            }
+
+            return club;
+        }),
+
 });

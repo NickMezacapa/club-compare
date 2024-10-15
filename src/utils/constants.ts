@@ -7,6 +7,7 @@ export interface Club {
 export interface ClubSpecs {
     year: number
     head_weight: number
+    c_dimmension: number
     basic_vcog: number
     moi: number
     actual_rcog: number
@@ -18,5 +19,5 @@ export interface ClubSpecs {
     calc_points: number
     mpf: number
     category: string
-    img_src: string
+    img_src?: string
 }

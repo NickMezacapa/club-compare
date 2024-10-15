@@ -1,4 +1,3 @@
-// components/SelectedClubs.tsx
 import Image from 'next/image';
 import { type Club } from '~/utils/constants';
 
