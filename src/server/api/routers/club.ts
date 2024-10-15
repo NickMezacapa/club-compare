@@ -94,6 +94,7 @@ export const clubRouter = createTRPCRouter({
                             name: true,
                         },
                     },
+                    specs: true
                 },
                 take: 10, // Limit the number of results
             });
