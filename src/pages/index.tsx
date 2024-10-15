@@ -1,17 +1,7 @@
 import Head from "next/head";
-import Link from "next/link";
-import Image from 'next/image';
-
 import ClubSearch from '~/components/ClubSearch';
 
-import { api } from "~/utils/api";
-
 export default function Home() {
-/*   const { data: specs, isLoading } = api.club.getSpecsForModel.useQuery({
-    brand: 'TaylorMade',
-    model: 'Qi HL #6',
-  }); */
-
   return (
     <>
       <Head>
@@ -24,30 +14,12 @@ export default function Home() {
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Compare <span className="text-[hsl(280,100%,70%)]">Golf</span> Clubs
           </h1>
-         
-          </div>
+        </div>
 
-          <div className="container mx-auto mt-8 border border-red-500 flex items-center flex-col">
-      <h1 className="text-2xl font-bold mb-4">Search for Golf Clubs</h1>
-      <ClubSearch />
-    </div>
-{/*           <p className="text-2xl text-white">
-          {isLoading ? (
-              "Loading specs..."
-            ) : specs?.specs && typeof specs.specs === 'object' && 'img_src' in specs.specs ? (
-              <div>
-                <Image
-                  src={(specs.specs as { img_src: string })?.img_src || ''}
-                  alt={`Image of ${(specs.specs as { model_name: string })?.model_name || 'unknown model'}`}
-                  width={500}
-                  height={500}
-                  className="rounded-lg"
-                />
-              </div>
-            ) : (
-              "Image not found for TaylorMade Qi HL #6"
-            )}
-          </p> */}
+        <div className="container mx-auto mt-8 border border-red-500 flex items-center flex-col">
+          <h1 className="text-2xl font-bold mb-4">Search for Golf Clubs</h1>
+          <ClubSearch />
+        </div>
       </main>
     </>
   );
