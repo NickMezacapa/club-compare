@@ -1,4 +1,5 @@
 export interface Club {
+    id?: string | number
     name: string
     brand: { name: string }
     specs: ClubSpecs
