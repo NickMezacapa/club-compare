@@ -1,6 +1,6 @@
 interface ClubSearchInputProps {
-    searchTerm: string;
-    onSearchChange: (term: string) => void;
+    searchTerm: string
+    onSearchChange: (term: string) => void
     numClubs: number
   }
   
@@ -13,8 +13,8 @@ interface ClubSearchInputProps {
         placeholder="Search for a club..."
         className="border p-2 rounded-md"
       />
-    );
-  };
+    )
+  }
   
-  export default ClubSearchInput;
+  export default ClubSearchInput
   

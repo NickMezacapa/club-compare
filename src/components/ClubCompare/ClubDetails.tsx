@@ -1,19 +1,20 @@
-import Image from 'next/image';
-import { type Club } from '~/utils/constants'; // Import the Club type
-import { type ClubSpecs } from '~/utils/constants'; // Import the Club type
+import Image from 'next/image'
+
+import { type Club } from '~/utils/constants' // Import the Club type
+import { type ClubSpecs } from '~/utils/constants' // Import the Club type
 
 interface ClubDetailsProps {
-  club: Club;
+  club: Club
 }
 
 const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
-  const { brand, name, specs } = club;
+  const { brand, name, specs } = club
 
   if (!specs || typeof specs !== 'object') {
-    return <p>No specifications available</p>;
+    return <p>No specifications available</p>
   }
 
-  const imgSrc = specs?.img_src;
+  const imgSrc = specs?.img_src
 
   const specLabels: { [key in keyof ClubSpecs]: string } = {
     year: 'Year',
@@ -30,7 +31,7 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
     moi_cf: 'MOI CF',
     calc_points: 'Calculated Points',
     mpf: 'MPF',
-  };
+  }
 
   return (
     <div className="w-1/2 border border-gray-300 p-4">
@@ -55,4 +56,4 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
   );
 };
 
-export default ClubDetails;
+export default ClubDetails

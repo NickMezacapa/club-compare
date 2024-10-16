@@ -1,36 +1,36 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import throttle from 'lodash.throttle';
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import throttle from 'lodash.throttle'
 
-import { api } from '~/utils/api'; 
-import { type Club } from '~/utils/constants';
-import { useSelectedClubs } from '~/context/SelectedClubsContext';
+import { api } from '~/utils/api';
+import { type Club } from '~/utils/constants'
+import { useSelectedClubs } from '~/context/SelectedClubsContext'
 
-import ClubSearchInput from './ClubSearchInput';
-import ClubList from './ClubList';
-import SelectedClubs from './SelectedClubs';
+import ClubSearchInput from './ClubSearchInput'
+import ClubList from './ClubList'
+import SelectedClubs from './SelectedClubs'
 
 const ClubSearch = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [throttledSearchTerm, setThrottledSearchTerm] = useState(searchTerm);
-  const { selectedClubs, setSelectedClubs } = useSelectedClubs();
+  const [searchTerm, setSearchTerm] = useState("")
+  const [throttledSearchTerm, setThrottledSearchTerm] = useState(searchTerm)
+  const { selectedClubs, setSelectedClubs } = useSelectedClubs()
 
   const router = useRouter()
 
   const throttledUpdate = throttle((term: string) => {
-    setThrottledSearchTerm(term);
-  }, 300);
+    setThrottledSearchTerm(term)
+  }, 300)
 
   const { data: clubs, isLoading } = api.club.searchClubs.useQuery(throttledSearchTerm, {
     enabled: throttledSearchTerm.length > 0,
     select: (data) => data as unknown as Club[],
-  });
+  })
 
   const handleSelectClub = (club: Club) => {
     if (selectedClubs.length >= 2) return;
-    setSelectedClubs((prev) => [...prev, club]);
+    setSelectedClubs((prev) => [...prev, club])
     setSearchTerm('')
-  };
+  }
 
   const handleCompareClubs = async () => {
     if (selectedClubs.length === 2) {
@@ -41,11 +41,11 @@ const ClubSearch = () => {
     }
   }
 
-  const showSearchSuggestions = clubs && clubs.length > 0 && selectedClubs.length < 2;
+  const showSearchSuggestions = clubs && clubs.length > 0 && selectedClubs.length < 2
 
   useEffect(() => {
     throttledUpdate(searchTerm);
-  }, [searchTerm, throttledUpdate]);
+  }, [searchTerm, throttledUpdate])
 
   return (
     <div className='border border-red-500'>
@@ -73,4 +73,4 @@ const ClubSearch = () => {
   );
 };
 
-export default ClubSearch;
+export default ClubSearch

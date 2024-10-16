@@ -1,8 +1,8 @@
-import { type Club } from '~/utils/constants';
+import { type Club } from '~/utils/constants'
 
 interface ClubListProps {
-  clubs: Club[];
-  onClubSelect: (club: Club) => void;
+  clubs: Club[]
+  onClubSelect: (club: Club) => void
 }
 
 const ClubList = ({ clubs, onClubSelect }: ClubListProps) => {
@@ -16,7 +16,7 @@ const ClubList = ({ clubs, onClubSelect }: ClubListProps) => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default ClubList;
+export default ClubList

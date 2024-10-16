@@ -1,24 +1,25 @@
-import Image from 'next/image';
-import { type Club } from '~/utils/constants';
-import { useSelectedClubs } from '~/context/SelectedClubsContext';
+import Image from 'next/image'
+
+import { useSelectedClubs } from '~/context/SelectedClubsContext'
+import { type Club } from '~/utils/constants'
 
 interface SelectedClubsProps {
-  selectedClubs: Club[];
+  selectedClubs: Club[]
 }
 
 const SelectedClubs = ({ selectedClubs }: SelectedClubsProps) => {
-  const { setSelectedClubs } = useSelectedClubs();
+  const { setSelectedClubs } = useSelectedClubs()
   
   const handleClearClub = (clubToClear: Club) => {
-    setSelectedClubs((prev) => prev.filter(club => `${club.name}${club.specs.year}` !== `${clubToClear.name}${clubToClear.specs.year}`));
-  };
+    setSelectedClubs((prev) => prev.filter(club => `${club.name}${club.specs.year}` !== `${clubToClear.name}${clubToClear.specs.year}`))
+  }
 
   return (
     <>
       {selectedClubs.map((club) => {
-        const { brand, name, specs } = club;
-        const year = specs?.year ?? 'N/A';
-        const imgSrc = specs?.img_src;
+        const { brand, name, specs } = club
+        const year = specs?.year ?? 'N/A'
+        const imgSrc = specs?.img_src
 
         return (
           <div key={club.name} className="mt-4 border border-gray-300 p-2">
@@ -39,10 +40,10 @@ const SelectedClubs = ({ selectedClubs }: SelectedClubsProps) => {
               Clear
             </button>
           </div>
-        );
+        )
       })}
     </>
-  );
+  )
 };
 
-export default SelectedClubs;
+export default SelectedClubs
