@@ -1,5 +1,6 @@
 import axios, { type AxiosError } from 'axios'
 import { type Club } from '../constants'
+import { key } from 'key';
 
 interface OpenAIResponse {
     choices: {
@@ -35,7 +36,7 @@ export const getRecommendation = async (
             max_tokens: 200, // Limit the response length
         }, {
             headers: {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, // Replace with your actual OpenAI API key
+                'Authorization': `Bearer ${key}`, // Replace with your actual OpenAI API key
                 'Content-Type': 'application/json',
             },
         });

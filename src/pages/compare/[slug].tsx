@@ -17,9 +17,9 @@ const ComparePage = () => {
 
 
 
-  // const [recommendation, setRecommendation] = useState<string | null>(null)
+  const [recommendation, setRecommendation] = useState<string | null>(null)
 
-/*   useEffect(() => {
+  useEffect(() => {
     const fetchRecommendation = async (): Promise<void> => {
       if (selectedClubs.length < 2) return
 
@@ -36,7 +36,7 @@ const ComparePage = () => {
     fetchRecommendation().catch((error) => {
       console.error('Error in fetchRecommendation:', error)
     })
-  }, [handicap, areaOfImprovement, selectedClubs]) */
+  }, [handicap, areaOfImprovement, selectedClubs])
   
   if (selectedClubs.length < 2) return <p>Select two clubs to compare.</p>
   const [club1, club2] = selectedClubs
@@ -56,12 +56,12 @@ const ComparePage = () => {
         <ClubDetails club={club1} />
         <ClubDetails club={club2} />
       </section>
-{/*       {recommendation && (
+      {recommendation && (
         <div className="mt-4 p-4 border border-gray-300">
           <h3 className="font-semibold">Expert Recommendation:</h3>
           <p>{recommendation}</p>
         </div>
-      )} */}
+      )}
     </section>
   )
 }
