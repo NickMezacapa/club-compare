@@ -13,7 +13,6 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
     return <p>No specifications available</p>;
   }
 
-  const year = specs?.year ?? 'N/A';
   const imgSrc = specs?.img_src;
 
   const specLabels: { [key in keyof ClubSpecs]: string } = {
@@ -36,7 +35,6 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
   return (
     <div className="w-1/2 border border-gray-300 p-4">
       <h2>{brand.name} - {name}</h2>
-      <p>Year: {year}</p>
       {/* Render other club specs here */}
       {imgSrc && (
         <Image 

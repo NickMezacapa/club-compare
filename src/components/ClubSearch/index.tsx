@@ -35,6 +35,7 @@ const ClubSearch = () => {
     if (selectedClubs.length === 2) {
         const [club1, club2] = selectedClubs
         const slug = `${club1?.name}-${club2?.name}`
+        
         await router.push(`/compare/${slug}`)
     }
   }
