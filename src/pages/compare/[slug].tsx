@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useUserContext } from '~/context/UserContext';
-import { useFetchClub } from '~/hooks/useFetchClub';
+import { useSelectedClubs } from '~/context/SelectedClubsContext';
 
 import ClubDetails from '~/components/ClubCompare/ClubDetails';
 
@@ -10,17 +10,13 @@ const ComparePage = () => {
 
   if (!slug) slug = ''
 
-  // Extract user handicap and wanted area of improvement from context
+  // Extract clubs, user handicap and wanted area of improvement from context
   const { handicap, areaOfImprovement } = useUserContext()
+  const { selectedClubs } = useSelectedClubs();
 
-  // Split the slug to get the club names
-  const [club1name, club2name] = (slug as string).split('-');
-
-  // Fetch club details based on the names
-  const { data: club1, isLoading: loadingClub1 } = useFetchClub(club1name!);
-  const { data: club2, isLoading: loadingClub2 } = useFetchClub(club2name!);
-
-  if (loadingClub1 || loadingClub2) return <p>Loading clubs...</p>;
+  if (selectedClubs.length < 2) return <p>Select two clubs to compare.</p>;
+  
+  const [club1, club2] = selectedClubs;
   if (!club1 || !club2) return <p>Clubs not found.</p>;
 
   return (

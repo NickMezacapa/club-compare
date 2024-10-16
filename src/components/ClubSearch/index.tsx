@@ -4,6 +4,7 @@ import throttle from 'lodash.throttle';
 
 import { api } from '~/utils/api'; 
 import { type Club } from '~/utils/constants';
+import { useSelectedClubs } from '~/context/SelectedClubsContext';
 
 import ClubSearchInput from './ClubSearchInput';
 import ClubList from './ClubList';
@@ -12,7 +13,7 @@ import SelectedClubs from './SelectedClubs';
 const ClubSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [throttledSearchTerm, setThrottledSearchTerm] = useState(searchTerm);
-  const [selectedClubs, setSelectedClubs] = useState<Club[]>([]);
+  const { selectedClubs, setSelectedClubs } = useSelectedClubs();
 
   const router = useRouter()
 
