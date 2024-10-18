@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useUserContext } from '~/context/UserContext'
+
 import { useSelectedClubs } from '~/context/SelectedClubsContext'
-import { getRecommendation } from '~/utils/helpers/makeRecommendation'
+import { useUserContext } from '~/context/UserContext'
+
 import ClubDetails from '~/components/ClubCompare/ClubDetails'
+import ClubRecommendation from '~/components/Recommendation'
+import { getRecommendation } from '~/components/Recommendation/makeRecommendation'
 
 const ComparePage = () => {
   const router = useRouter()
@@ -15,11 +18,9 @@ const ComparePage = () => {
   const { handicap, areaOfImprovement } = useUserContext()
   const { selectedClubs } = useSelectedClubs()
 
+  // const [recommendation, setRecommendation] = useState<string | null>(null)
 
-
-  const [recommendation, setRecommendation] = useState<string | null>(null)
-
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchRecommendation = async (): Promise<void> => {
       if (selectedClubs.length < 2) return
 
@@ -36,7 +37,7 @@ const ComparePage = () => {
     fetchRecommendation().catch((error) => {
       console.error('Error in fetchRecommendation:', error)
     })
-  }, [handicap, areaOfImprovement, selectedClubs])
+  }, [handicap, areaOfImprovement, selectedClubs]) */
   
   if (selectedClubs.length < 2) return <p>Select two clubs to compare.</p>
   const [club1, club2] = selectedClubs
@@ -56,12 +57,7 @@ const ComparePage = () => {
         <ClubDetails club={club1} />
         <ClubDetails club={club2} />
       </section>
-      {recommendation && (
-        <div className="mt-4 p-4 border border-gray-300">
-          <h3 className="font-semibold">Expert Recommendation:</h3>
-          <p>{recommendation}</p>
-        </div>
-      )}
+     {/*  <ClubRecommendation recommendation={recommendation} /> */}
     </section>
   )
 }

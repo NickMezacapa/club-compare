@@ -36,7 +36,7 @@ const SelectedClubs = ({ selectedClubs }: SelectedClubsProps) => {
               />
             )}
             </div>
-            <button onClick={() => handleClearClub(club)} className="text-red-500">
+            <button onClick={() => handleClearClub(club)} className="text-red-500 w-full mt-2 flex items-center justify-center mx-auto text-center">
               Clear
             </button>
           </div>

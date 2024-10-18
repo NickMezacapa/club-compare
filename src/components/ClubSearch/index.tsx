@@ -48,18 +48,21 @@ const ClubSearch = () => {
   }, [searchTerm, throttledUpdate])
 
   return (
-    <div className='border border-red-500'>
+    <section>
       <ClubSearchInput searchTerm={searchTerm} onSearchChange={setSearchTerm} numClubs={selectedClubs.length} />
 
       {isLoading && <p>Loading...</p>}
 
       {selectedClubs.length === 2 && (
-      <button 
-        className="mt-4 bg-blue-500 text-white p-2 rounded-md" 
-        onClick={handleCompareClubs}
-      >
-        Compare Clubs
-      </button>
+        <div className='w-full flex items-center justify-center'>
+          <button 
+            className="mt-4 bg-blue-500 text-white p-2 rounded-md mx-auto" 
+            onClick={handleCompareClubs}
+            role='button'
+          >
+            Compare Clubs
+          </button>
+        </div>
     )}
 
       {showSearchSuggestions && (
@@ -69,7 +72,7 @@ const ClubSearch = () => {
       {!isLoading && clubs?.length === 0 && <p>No clubs found</p>}
       {selectedClubs.length === 1 && (<p>Select one more club!</p>)}
       <SelectedClubs selectedClubs={selectedClubs} />
-    </div>
+    </section>
   );
 };
 

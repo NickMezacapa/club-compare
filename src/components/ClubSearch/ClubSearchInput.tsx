@@ -11,7 +11,7 @@ interface ClubSearchInputProps {
         value={numClubs === 2 ? '' : searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Search for a club..."
-        className="border p-2 rounded-md"
+        className={`border p-2 rounded-md w-full ${numClubs === 2 ? 'hidden' : 'visible'}`}
       />
     )
   }

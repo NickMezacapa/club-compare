@@ -1,5 +1,5 @@
 import axios, { type AxiosError } from 'axios'
-import { type Club } from '../constants'
+import { type Club } from '../../utils/constants'
 import { key } from 'key';
 
 interface OpenAIResponse {
@@ -33,10 +33,10 @@ export const getRecommendation = async (
         const response = await axios.post<OpenAIResponse>('https://api.openai.com/v1/chat/completions', {
             model: 'gpt-3.5-turbo',
             messages: [{ role: 'user', content: prompt }],
-            max_tokens: 200, // Limit the response length
+            max_tokens: 200,
         }, {
             headers: {
-                'Authorization': `Bearer ${key}`, // Replace with your actual OpenAI API key
+                'Authorization': `Bearer ${key}`,
                 'Content-Type': 'application/json',
             },
         });
